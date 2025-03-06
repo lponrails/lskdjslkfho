@@ -1,4 +1,20 @@
 import streamlit as st
+import app, os
+
+
+os.makedirs(".streamlit", exist_ok=True)
+with open(".streamlit/config.toml", "w") as f:
+    f.write(
+        """[theme]
+base="light"
+primaryColor="#00939a"
+backgroundColor="#FFFFFF"
+secondaryBackgroundColor="#F0F2F6"
+textColor="#31333F"
+font="sans serif"
+"""
+    )
+
 
 st.set_page_config(
     page_title="Jornada Marandu | LP on Rails", page_icon="👁️", layout="wide"
