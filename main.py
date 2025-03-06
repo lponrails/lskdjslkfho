@@ -1,6 +1,5 @@
 import streamlit as st
-import app, os
-
+import os, threading, uvicorn
 
 os.makedirs(".streamlit", exist_ok=True)
 with open(".streamlit/config.toml", "w") as f:
@@ -14,6 +13,16 @@ textColor="#31333F"
 font="sans serif"
 """
     )
+
+
+def run_api():
+    from app import app
+
+    uvicorn.run(app, host="localhost", port=8000)
+
+
+api_thread = threading.Thread(target=run_api, daemon=True)
+api_thread.start()
 
 
 st.set_page_config(
