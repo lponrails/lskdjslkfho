@@ -12,7 +12,7 @@ async def root():
 
 
 @app.post("/predict/image", response_model=PredictionResult)
-async def predict_image(file: UploadFile = File(...), confidence_threshold: int = 50):
+async def predict_image(file: UploadFile = File(...), confidence_threshold: int = 40):
     """Recebe uma imagem e retorna a predicao em JSON"""
     image_bytes = await file.read()
     result = process_image(image_bytes, confidence_threshold=confidence_threshold)
@@ -21,7 +21,7 @@ async def predict_image(file: UploadFile = File(...), confidence_threshold: int 
 
 @app.post("/predict/images", response_model=PredictionResult)
 async def predict_images(
-    files: list[UploadFile] = File(...), confidence_threshold: int = 50
+    files: list[UploadFile] = File(...), confidence_threshold: int = 40
 ):
     """Recebe multiplas imagens e retorna um DataFrame com as predicoes."""
     results = []
@@ -33,7 +33,7 @@ async def predict_images(
 
 
 @app.post("/predict/video", response_model=PredictionResult)
-async def predict_video(file: UploadFile = File(...), confidence_threshold: int = 50):
+async def predict_video(file: UploadFile = File(...), confidence_threshold: int = 40):
     """Recebe um video e retorna um DataFrame com as predicoes quadro a quadro."""
     video_bytes = await file.read()
     cap = cv2.VideoCapture(video_bytes)
